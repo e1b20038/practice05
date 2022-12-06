@@ -41,5 +41,14 @@ public class Sample3AuthConfiguration {
   PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-  
+
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.formLogin();
+    http.authorizeHttpRequests()
+        .mvcMatchers("/sample5/**").authenticated();
+    http.logout().logoutSuccessUrl("/");
+
+    return http.build();
+  }
 }
