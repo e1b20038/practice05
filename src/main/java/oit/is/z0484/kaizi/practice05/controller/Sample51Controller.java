@@ -47,4 +47,16 @@ public class Sample51Controller {
     return "sample51.html";
   }
 
+  @GetMapping("step4")
+  public String sample54(@RequestParam Integer id, ModelMap model){
+    Fruit fruit4 = fMapper.selectById(id);
+    model.addAttribute("fruit4", fruit4);
+
+    ArrayList<Fruit>fruits2 = fMapper.selectAllFruit();
+    model.addAttribute("fruits2", fruits2);
+
+    return "sample51.html";
+
+  }
+
 }
