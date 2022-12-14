@@ -35,4 +35,14 @@ public class Sample56Controller {
 
     return emitter;
   }
+
+  @GetMapping("step2")
+  public SseEmitter pushpach() {
+    // infoレベルでログを出力する
+    logger.info("pushPeach");
+    final SseEmitter sseEmitter = new SseEmitter();
+    this.ac56.sendpeach(sseEmitter);
+    return sseEmitter;
+
+  }
 }
