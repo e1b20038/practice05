@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+  <meta charset="utf-8">
+  <title>SpringBoot sample5-7</title>
+</head>
+
+<body>
+  <h1> Authorized! <span sec:authentication="name"></span>
+  </h1>
+  <a href="/logout">ログアウト</a>
+
+  <h2>Online Fruit Shop</h2>
+
+  <div>
+
+    <table border="1">
+      <thead>
+        <th>Index</th>
+        <th>果物</th>
+        <th>金額</th>
+        <th>処理</th>
+      </thead>
+      <tbody>
+        <sapn th:if="${fruits7}">
+          <tr th:each="fruit,stat:${fruits7}">
+            <td>[[${stat.index}]]</td>
+            <td>[[${fruit.name}]]</td>
+            <td>[[${fruit.price}]]</td>
+            <td><a th:href="@{/sample5/step8?id=2}">購入</a></td>
+          </tr>
+        </sapn>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
