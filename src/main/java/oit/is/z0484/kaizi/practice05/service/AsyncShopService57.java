@@ -24,4 +24,11 @@ public class AsyncShopService57 {
     return fMapper.selectAllFruit();
   }
 
+  public Fruit syncBuyFruits(int id) {
+    Fruit fruit = fMapper.selectById(id);
+
+    fMapper.deleteById(id);
+    return fruit;
+  }
+
 }
