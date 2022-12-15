@@ -1,6 +1,7 @@
 package oit.is.z0484.kaizi.practice05.service;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,31 @@ public class AsyncShopService57 {
 
     fMapper.deleteById(id);
     return fruit;
+  }
+
+  @Async
+  public void asyncShowFruitsList(SseEmitter emitter) {
+
+    updateDB = true;
+
+    try {
+      while (true) {
+        if (updateDB == false) {
+          TimeUnit.MILLISECONDS.sleep(500);
+          continue;
+        }
+        ArrayList<Fruit> fruits7 = this.syncShowFruitsList();
+        emitter.send(fruits7);
+        TimeUnit.MILLISECONDS.sleep(1000);
+        updateDB = false;
+      }
+    } catch (Exception e) {
+      logger.warn("Exception :" + e.getClass().getName() + ":" + e.getMessage());
+    } finally {
+      emitter.complete();
+    }
+    System.out.println("asyncShowFruitsList complete");
+
   }
 
 }

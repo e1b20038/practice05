@@ -4,6 +4,32 @@
 <head>
   <meta charset="utf-8">
   <title>SpringBoot sample5-7</title>
+  <script>
+    window.onload = function () {
+      var sse = new EventSource('/sample5/step9');
+      sse.onmessage = function (event) {
+        console.log("sse.onmessage");
+        console.log(event.data);
+        var fruit_list = JSON.parse(event.data);
+        var fruit_table = "";
+
+        for (var i = 0; i < fruit_list.length; i++) {
+          var bgn_tr = "<tr>";
+          var end_tr = "</tr>";
+          var idx = "<td>" + i + "</td>";
+          var f_name = "<td>" + fruit_list[i].name + "</td>";
+          var f_price = "<td>" + fruit_list[i].price + "</td>";
+          var f_proc = "<td>" + "<a href= '/sample5/step8?id=" + fruit_list[i].id + "'>購入</a>" + "</td>";
+          fruit_table = fruit_table + bgn_tr + idx + f_name + f_price + f_proc + end_tr;
+        }
+        console.log(fruit_table);
+        var tbody = document.getElementById("fruit_list");
+        tbody.innerHTML = fruit_table;
+
+      }
+    }
+
+  </script>
 </head>
 
 <body>
@@ -22,7 +48,7 @@
         <th>金額</th>
         <th>処理</th>
       </thead>
-      <tbody>
+      <tbody id="fruit_list">
         <sapn th:if="${fruits7}">
           <tr th:each="fruit,stat:${fruits7}">
             <td>[[${stat.index}]]</td>
