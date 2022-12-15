@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+  <meta charset="utf-8">
+  <title>SpringBoot sample5-6-2</title>
+  <script>
+    window.onload = function () {
+      var sse = new EventSource('/sample56/step2');
+      sse.onmessage = function (event) {
+        console.log(event.data);
+        var p1 = document.getElementById("p1");
+        p1.appendChild(document.createTextNode(event.data));
+        p1.appendChild(document.createElement("br"));
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+  <p id="p1"></p>
+</body>
+
+</html>
