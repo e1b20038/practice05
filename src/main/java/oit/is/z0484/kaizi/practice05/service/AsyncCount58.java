@@ -19,7 +19,6 @@ public class AsyncCount58 {
   @Async
   public void count(SseEmitter emitter, String role) throws IOException {
     logger.info("AsyncCount58 start");
-
     try {
       while (true) {
         int count = 0;

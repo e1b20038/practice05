@@ -47,8 +47,7 @@ public class Sample3AuthConfiguration {
     http.formLogin();
     http.authorizeHttpRequests()
         .mvcMatchers("/sample5/**").authenticated()
-        .mvcMatchers("/sample58/**").authenticated()
-        ;
+        .mvcMatchers("/sample58*").authenticated();
     http.logout().logoutSuccessUrl("/");
 
     http.csrf().disable();
